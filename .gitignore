@@ -1,5 +1,11 @@
 # created by Piddnad in 2019/1/15
 
-/checkpoints
 .DS_Store
 */.DS_Store
+
+# datasets
+/data/brainwash
+
+# models
+/checkpoints
+/data/pretrained_model

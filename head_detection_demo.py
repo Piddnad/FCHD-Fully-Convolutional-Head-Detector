@@ -31,6 +31,7 @@ def read_img(path):
     img = np.asarray(f, dtype=np.float32)
     _, H, W = img.shape
     img = img.transpose((2,0,1))
+    _, H, W = img.shape  # added in 2019/1/12
     img = preprocess(img)
     _, o_H, o_W = img.shape
     scale = o_H / H
@@ -52,9 +53,13 @@ def detect(img_path, model_path):
     print ("[INFO] Head detection over. Time taken: {:.4f} s".format(tt))
     for i in range(pred_bboxes_.shape[0]):
         ymin, xmin, ymax, xmax = pred_bboxes_[i,:]
-        utils.draw_bounding_box_on_image_array(img_raw,ymin, xmin, ymax, xmax)
+        # utils.draw_bounding_box_on_image_array(img_raw,ymin, xmin, ymax, xmax) 
+        utils.draw_bounding_box_on_image_array(img_raw, ymin/scale, xmin/scale, ymax/scale, xmax/scale) # added 2019/1/12
+        
+    plt.switch_backend('agg') # added in 2019/1/12 by Piddnad   
     plt.axis('off')
     plt.imshow(img_raw)
+    SAVE_FLAG = 1;
     if SAVE_FLAG == 1:
         plt.savefig(os.path.join(opt.test_output_path, file_id+'.png'), bbox_inches='tight', pad_inches=0)
     else:

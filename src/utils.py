@@ -124,7 +124,7 @@ def get_phase_data_list(data_list_path, dataset):
             to the number of images contained in the split of the dataset.
     """
     data_list = []
-    with open(data_list_path, 'rb') as fp:
+    with open(data_list_path, 'r') as fp: # edited in 2019/1/13 by Piddnad, from 'rb'
         for line in fp.readlines():
             d = data_line_parser(line, dataset)
             if d['number'] != 0:

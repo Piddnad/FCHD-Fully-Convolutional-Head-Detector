@@ -54,7 +54,7 @@ def vis_image(img, ax=None):
         Returns the Axes object with the plot for further tweaking.
 
     """
-
+    plot.switch_backend('agg') # added in 2019/1/13 by Piddnad  
     if ax is None:
         fig = plot.figure()
         ax = fig.add_subplot(1, 1, 1)
